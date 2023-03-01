@@ -1,14 +1,8 @@
-// https://github.com/marcoschwartz/LiquidCrystal_I2C/archive/master.zip
-#include <LiquidCrystal_I2C.h>
-
-//CONSTANTS
-#define LCD_COLUMNS 16
-#define LCD_ROWS  2
-#define LCD_ADDRESS 0x27
+#include "display.h"
 
 LiquidCrystal_I2C lcd(LCD_ADDRESS, LCD_COLUMNS, LCD_ROWS);
 
-void setupDisplay(void)
+void displayInit(void)
 {
     // initialize LCD
     lcd.init();

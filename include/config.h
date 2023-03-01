@@ -1,3 +1,6 @@
+#ifndef _CONFIG_H_
+#define _CONFIG_H_
+
 //CONSTANTS
 #define DHT22 4
 #define BUZZER 2
@@ -20,3 +23,5 @@
 #define PORT 1883
 //Tópico aonde serão feitos os publish
 #define TOPIC "smt"
+
+#endif

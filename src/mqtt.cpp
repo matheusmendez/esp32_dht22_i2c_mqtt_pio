@@ -1,16 +1,10 @@
-// https://www.fernandok.com/2018/11/introducao-ao-protocolo-mqtt-com.html
-// https://github.com/knolleary/pubsubclient/archive/refs/heads/master.zip
-#include <Arduino.h>
-#include <WiFi.h>
-#include <PubSubClient.h>
-#include "lcdI2C.h"
-#include "config.h"
+#include "mqtt.h"
 
 //Objeto WiFiClient usado para a conexão wifi
 WiFiClient broker;
 PubSubClient client(broker);
 
-bool mqttInit()
+bool mqttInit(void)
 {
     //Inicia WiFi com o SSID e a senha
     WiFi.begin(WIFISSID, WIFIPASSWORD);
@@ -86,4 +80,28 @@ bool sendValues(float temperature, float humidity)
         return false;
     }
     return true;
+}
+
+bool isConnected(void)
+{
+    return client.connected();
+}
+
+bool mqttSetup(void)
+{
+    //Exibe mensagem no display
+    showDisplay(0, "Setting up mqtt...", true);
+    Serial.println("Setting up mqtt...");
+    
+    //Inicializa mqtt (conecta o esp com o wifi, configura e conecta com o servidor mqtt)
+    if(!mqttInit())
+    {        
+        delay(3000);
+        showDisplay(0, "Failed!", false);
+        Serial.println("Failed!");
+        ESP.restart();
+    }
+    
+    showDisplay(0, "OK", false);
+    Serial.println("OK");
 }
