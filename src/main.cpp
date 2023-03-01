@@ -22,26 +22,30 @@ void loop(){
 
     //Lê a temperatura e umidade e exibimos no display passando uma flag (que sinaliza sucesso na leitura)
     if(getClimate(&temp,&humi))
+    {
         showClimate(true,temp, humi);
+        if(millis()-last_mqtt >= TIMEOUT_MQTT)
+        {
+            if(sendValues(temp, humi))
+            {      
+                Serial.println("Successfully sent data");
+                //showDisplay(4,"Successfully sent data", false);
+            }
+            else
+            {      
+                Serial.println("Failed to send sensor data");
+                //showDisplay(4,"Failed to send sensor data", false);
+            }
+            last_mqtt = millis();
+        }
+    }
+        
     else
         showClimate(false,temp, humi);
 
     //Esperamos 2.5s antes de exibir o status do envio para dar efeito de pisca no display
     delay(2500);
-    if(millis()-last_mqtt >= TIMEOUT_MQTT)
-    {
-        if(sendValues(temp, humi))
-        {      
-            Serial.println("Successfully sent data");
-            //showDisplay(4,"Successfully sent data", false);
-        }
-        else
-        {      
-            Serial.println("Failed to send sensor data");
-            //showDisplay(4,"Failed to send sensor data", false);
-        }
-        last_mqtt = millis();
-    }
+    
     //Esperamos 2.5s para dar tempo de ler as mensagens acima
     controlAlarm();
     delay(2500); 

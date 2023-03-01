@@ -73,7 +73,7 @@ bool sendValues(float temperature, float humidity)
     char json[250];
 
     //Atribui para a cadeia de caracteres "json" os valores referentes a temperatura e os envia para a variável do ubidots correspondente
-    sprintf(json,  "{\"id_sensor\":\"%s\",\"temp_value\":%02.02f, \"humi_value\":%02.02f}", DEVICE_ID, temperature, temperature, humidity);  
+    sprintf(json,  "{\"id_sensor\":\"%s\",\"temp_value\":%02.02f, \"humi_value\":%02.02f}", DEVICE_ID, temperature, humidity);  
 
     if(!client.publish(TOPIC, json))
     {

@@ -15,7 +15,7 @@ bool getClimate(float* temp,float* humi)
         Serial.println(err);
 
         //Zera valores
-        temp = humi = 0;
+        *temp = *humi = 0;
         return false;
     }
 
