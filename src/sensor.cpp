@@ -18,7 +18,8 @@ bool getClimate(float* temp,float* humi)
         *temp = *humi = 0;
         return false;
     }
-
+     *temp -= TEMP_OFFSET;
+     *humi -= HUMI_OFFSET;
     return true;
 }
 

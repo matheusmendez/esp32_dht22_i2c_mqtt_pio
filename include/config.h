@@ -10,6 +10,9 @@
 #define HUMI_MIN 30
 #define TIMEOUT 900000
 #define TIMEOUT_MQTT 60000
+#define  TEMP_OFFSET -1.2
+#define HUMI_OFFSET 16.5
+
 
 //WIFI
 #define WIFISSID "MULTIWIFI"//Coloque seu SSID de WiFi aqui
