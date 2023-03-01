@@ -21,7 +21,7 @@ void loop(){
         reconnect();
 
     //Lê a temperatura e umidade e exibimos no display passando uma flag (que sinaliza sucesso na leitura)
-    if(getClimate(temp,humi))
+    if(getClimate(&temp,&humi))
         showClimate(true,temp, humi);
     else
         showClimate(false,temp, humi);

@@ -3,13 +3,13 @@
 SimpleDHT22 dht22(DHT22);
 
 //Obtém temperatura e umidade do sensor
-bool getClimate(float temp,float humi)
+bool getClimate(float* temp,float* humi)
 {  
     int err = SimpleDHTErrSuccess;
 
     //Passamos as variáveis 'temperature' e 'humidity' por parâmetro na função chamada 'read2', elas serão retornadas por referência
     //Se não for retornado o código de SimpleDHTErrSuccess (sucesso), exibimos o valor de erro obtido
-    if ((err = dht22.read2(&temp, &humi, NULL)) != SimpleDHTErrSuccess) 
+    if ((err = dht22.read2(temp, humi, NULL)) != SimpleDHTErrSuccess) 
     {
         Serial.print("Read DHT22 failed, err=");
         Serial.println(err);

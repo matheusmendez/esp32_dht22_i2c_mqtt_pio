@@ -87,7 +87,7 @@ bool isConnected(void)
     return client.connected();
 }
 
-bool mqttSetup(void)
+void mqttSetup(void)
 {
     //Exibe mensagem no display
     showDisplay(0, "Setting up mqtt...", true);

@@ -8,6 +8,6 @@
 
 
 void showClimate(bool success,float temp,float humi);
-bool getClimate(float temp,float humi);
+bool getClimate(float* temp,float* humi);
 
 #endif

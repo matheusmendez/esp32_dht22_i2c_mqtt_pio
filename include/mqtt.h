@@ -13,7 +13,7 @@
 
 /*Protótipos das funções*/
 bool mqttInit(void);
-bool mqttSetup(void);
+void mqttSetup(void);
 void reconnect(void);
 bool sendValues(float temperature, float humidity);
 bool isConnected(void);
