@@ -43,12 +43,8 @@ void loop(){
     else
         showClimate(false,temp, humi);
 
-    //Esperamos 2.5s antes de exibir o status do envio para dar efeito de pisca no display
-    delay(2500);
-    
-    //Esperamos 2.5s para dar tempo de ler as mensagens acima
     controlAlarm();
-    delay(2500); 
+    delay(DELAY_LOOP); 
 }
 
 void controlAlarm(void)
