@@ -4,5 +4,5 @@ void saidaInit(void)
 {
     Serial.begin(115200);
     pinMode(BUZZER,OUTPUT);
-    digitalWrite(BUZZER,HIGH);
+    digitalWrite(BUZZER,LOW);
 }

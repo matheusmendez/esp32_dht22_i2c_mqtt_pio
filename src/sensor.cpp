@@ -36,8 +36,8 @@ void showClimate(bool success,float temp, float humi)
     }
     else
     {
-        showDisplay(0, "Temp: -", true);
-        showDisplay(1, "Humi: -", false);
+        //showDisplay(0, "Temp: -", true);
+        //showDisplay(1, "Humi: -", false);
         Serial.println("Temp: -");
         Serial.println("Humi: -");
     }

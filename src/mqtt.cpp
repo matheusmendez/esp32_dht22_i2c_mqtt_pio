@@ -14,16 +14,17 @@ bool mqttInit(void)
     {
         delay(1000);
         Serial.println("Establishing connection to WiFi..");
-        showDisplay(0,"Connected to network", true);
+        showDisplay(0,"Connecting", true);
     }
 
     //Exibe no monitor serial
-    Serial.println("Connected to network");
-    showDisplay(0,"Connected to network", true);
+    Serial.println("Connected");
+    showDisplay(0,"Connected", true);
 
     //Exibe no monitor serial
-    Serial.println("IP:"+String(WiFi.localIP()));
-    showDisplay(1,"IP:"+String(WiFi.localIP()), false);
+    Serial.print("IP:");
+    Serial.println(WiFi.localIP());
+    showDisplay(1,WiFi.localIP().toString().c_str(), false);
     delay(3000);
     //Seta servidor com o broker e a porta
     client.setServer(SERVER, PORT);
@@ -44,8 +45,8 @@ void reconnect()
     while (!client.connected()) 
     {
         //sinaliza desconexão do mqtt no display
-        showDisplay(0,"Disconnected", true); 
-        showDisplay(1, "Trying to reconnect mqtt...", false);
+        //showDisplay(0,"Disconnected", true); 
+        //showDisplay(1, "Trying to reconnect mqtt...", false);
         Serial.println("Attempting MQTT connection...");
 
         //Tenta conectar
@@ -63,7 +64,7 @@ void reconnect()
         }
     }
     //Sinaliza reconexão do mqtt no display
-    showDisplay(0,"Reconnected", true); 
+    //showDisplay(0,"Reconnected", true); 
 }
 
 //Envia valores por mqtt

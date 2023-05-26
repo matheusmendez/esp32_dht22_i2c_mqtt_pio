@@ -1,3 +1,19 @@
 {
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "xprotocol"
+            },
+            "previewLimit": 50,
+            "server": "192.168.2.2",
+            "port": 33060,
+            "driver": "MySQL",
+            "name": "memtest",
+            "database": "passmark_mgtconsole",
+            "username": "passmark",
+            "password": "passmark",
+            "connectionTimeout": 10
+        }
+    ]
 }

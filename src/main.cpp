@@ -7,6 +7,7 @@
 // VARS
 float temp, humi, last, turnoff;
 float last_mqtt = -TIMEOUT_MQTT;
+float last_alarm = -TIMEOUT_ALARM;
 bool control = false;
 
 void setup(){
@@ -49,25 +50,46 @@ void loop(){
 
 void controlAlarm(void)
 {
-    if (temp > TEMP_MAX|| temp < TEMP_MIN|| humi > HUMI_MAX || humi < HUMI_MIN )
+    if(!control && millis() - last_alarm < TIMEOUT_ALARM)
     {
-        if(!control)
+        if ((temp > TEMP_MAX || temp < TEMP_MIN|| humi > HUMI_MAX || humi < HUMI_MIN) && (temp != 0.0F && humi != 0.0F))
         {
-            digitalWrite(BUZZER,LOW);
-            last = millis();
+            //digitalWrite(BUZZER,LOW);
+            digitalWrite(BUZZER,HIGH);
+            last_alarm = millis();
             control = true;
         }
-        else
-        {
-            if(millis()-last >= TIMEOUT)
-            {
-                control = false;
-            }
-            if(millis()-turnoff >= 5000)
-            {
-                digitalWrite(BUZZER,HIGH);
-                turnoff = millis() + TIMEOUT;
-            }
-        }
     }
+    else if (millis() - last_alarm >= 5000)
+    {
+        digitalWrite(BUZZER,LOW);
+        control = false;
+    }
+    
 }
+// void controlAlarm(void)
+// {
+//     if ((temp > TEMP_MAX || temp < TEMP_MIN|| humi > HUMI_MAX || humi < HUMI_MIN) && (temp != 0.0F && humi != 0.0F))
+//     {
+//         if(!control)
+//         {
+//             //digitalWrite(BUZZER,LOW);
+//             digitalWrite(BUZZER,HIGH);
+//             last = millis();
+//             control = true;
+//         }
+//         else
+//         {
+//             if(millis()-last >= TIMEOUT)
+//             {
+//                 control = false;
+//             }
+//             if(millis()-turnoff >= 5000)
+//             {
+//                 //digitalWrite(BUZZER,HIGH);
+//                 digitalWrite(BUZZER,LOW);
+//                 turnoff = millis() + TIMEOUT;
+//             }
+//         }
+//     }
+// }
