@@ -6,8 +6,10 @@
 
 // VARS
 float temp, humi, last, turnoff;
-float last_mqtt = -TIMEOUT_MQTT;
-float last_alarm = -TIMEOUT_ALARM;
+// float last_mqtt = -TIMEOUT_MQTT;
+// float last_alarm = -TIMEOUT_ALARM;
+float last_mqtt = 0.0F;
+float last_alarm = 0.0F;
 bool control = false;
 
 void setup(){
@@ -25,7 +27,7 @@ void loop(){
     if(getClimate(&temp,&humi))
     {
         showClimate(true,temp, humi);
-        if(millis()-last_mqtt >= TIMEOUT_MQTT)
+        if(millis()-last_mqtt >= TIMEOUT_MQTT || last_mqtt == 0.0F)
         {
             if(sendValues(temp, humi))
             {      
@@ -50,7 +52,7 @@ void loop(){
 
 void controlAlarm(void)
 {
-    if(!control && millis() - last_alarm < TIMEOUT_ALARM)
+    if(!control && (millis() - last_alarm < TIMEOUT_ALARM || last_mqtt == 0.0F))
     {
         if ((temp > TEMP_MAX || temp < TEMP_MIN|| humi > HUMI_MAX || humi < HUMI_MIN) && (temp != 0.0F && humi != 0.0F))
         {
